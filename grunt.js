@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
   'use strict';
-  
-  // Project configuration.
+
   grunt.initConfig({
     lint: {
       all: ['grunt.js', 'tasks/*.js']
@@ -25,4 +24,5 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
   grunt.registerTask('default', 'lint');
+  
 };
