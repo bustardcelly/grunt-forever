@@ -1,0 +1,46 @@
+{
+  "name": "grunt-forever",
+  "description": "Grunt task for starting and stopping an application as a daemon using forever",
+  "version": "0.1.0",
+  "homepage": "https://github.com/bustardcelly/grunt-forever",
+  "author": {
+    "name": "Todd Anderson",
+    "url": "http://custardbelly.com/blog"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bustardcelly/grunt-forever.git"
+  },
+  "bugs": {
+    "url": "git://github.com/bustardcelly/grunt-forever/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/bustardcelly/grunt-forever/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "engines": {
+    "node": "*"
+  },
+  "bin": {
+    "grunt-forever": "bin/grunt-forever"
+  },
+  "scripts": {},
+  "dependencies": {
+    "forever": ">=0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.16"
+  },
+  "keywords": [
+    "forever",
+    "forevergrunt",
+    "grunt",
+    "gruntplugin",
+    "plugins",
+    "daemon"
+  ],
+  "readme": "# grunt-forever."
+}
