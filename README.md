@@ -47,3 +47,16 @@ forever: {
   main: 'index.js'
 }
 ```
+
+### Command example
+```bash
+grunt forever:start
+```
+
+```bash
+grunt forever:stop
+```
+
+```bash
+grunt forever:restart
+```
