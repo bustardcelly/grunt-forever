@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     lint: {
-      all: ['grunt.js', 'tasks/*.js']
+      all: ['grunt.js', 'tasks/*.js', 'test/spec/*.spec.js']
     },
     jshint: {
       options: {
@@ -19,10 +19,24 @@ module.exports = function(grunt) {
         node: true,
         es5: true
       }
+    },
+    jasmine_node: {
+      spec: "./test/spec",
+      projectRoot: ".",
+      requirejs: false,
+      forceExit: true,
+      jUnit: {
+        report: false,
+        savePath : "./build/reports/jasmine/",
+        useDotNotation: true,
+        consolidate: true
+      }
     }
   });
 
   grunt.loadTasks('tasks');
-  grunt.registerTask('default', 'lint');
+  grunt.loadNpmTasks('grunt-jasmine-node');
+  
+  grunt.registerTask('default', 'lint jasmine_node');
   
 };
