@@ -21,6 +21,25 @@ var grunt   = require('grunt'),
     test.ifError(value)
 */
 
+grunt.registerHelper('plugin', function() {
+  return 'plugin!!!';
+});
+
+exports['test'] = {
+  setUp: function(done) {
+    // setup here
+    done();
+  },
+  'helper': function(test) {
+    test.expect(1);
+    // tests here
+    test.equal(grunt.helper('plugin'), 'plugin!!!', 'should return the correct value.');
+    test.done();
+  }
+};
+
+
+/*
 exports['forever'] = {
   setUp: function(done) {
     grunt.task.directive('<forever:start>');
@@ -59,3 +78,4 @@ exports['forever'] = {
     done();
   }
 };
+*/

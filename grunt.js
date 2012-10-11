@@ -35,8 +35,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'lint test');
 
   grunt.registerHelper('forever', function(operation) {
-    console.log( JSON.stringify(grunt.task, null, 2) );
     grunt.task.run('forever:' + operation);
   });
-  
+
 };

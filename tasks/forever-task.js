@@ -1,5 +1,7 @@
 var forever     = require('forever'),
-    logFile     = process.cwd() + '/forever.log',
+    logDir      = process.cwd() + '/forever',
+    logFile     = logDir + '/out.log',
+    errFile     = logDir + '/err.log',
     commandMap  = {
       start:      startForeverWithIndex,
       stop:       stopOnProcess,
@@ -78,11 +80,15 @@ function startForeverWithIndex( index ) {
       done();
     }
     else {
+      gruntRef.file.mkdir(logDir);
       // 'forever start -o out.log -e err.log -a -m 3 index.js';
       forever.startDaemon( index, {
-        logFile: logFile
+        errFile: errFile,
+        outFile: logFile,
+        append: true,
+        max: 3
       });
-      log( 'Logs can be found at ' + logFile );
+      log( 'Logs can be found at ' + logDir + '.' );
       done();
     }
   });
