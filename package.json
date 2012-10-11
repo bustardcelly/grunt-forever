@@ -27,13 +27,10 @@
   "bin": {
     "grunt-forever": "bin/grunt-forever"
   },
-  "scripts": {},
   "dependencies": {
     "forever": ">=0.10.0"
   },
   "devDependencies": {
-    "jasmine-node": "*",
-    "grunt-jasmine-node": ">=0.0.2",
     "grunt": "~0.3.16"
   },
   "keywords": [

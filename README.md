@@ -4,7 +4,7 @@ grunt-forever
 > forever task for grunt to start, stop and restart an application as a daemon.
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-forever`
+Install this grunt plugin next to your project's [grunt.js gruntfile](https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md) with: `npm install grunt-forever`
 
 Then add this line to your project's `grunt.js` gruntfile:
 

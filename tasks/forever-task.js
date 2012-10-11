@@ -7,22 +7,40 @@ var forever     = require('forever'),
   },
   done, gruntRef;
 
+/**
+ * Logs message to console using log.writeln() from grunt.
+ * @param  {String} message Message to print with log formatting.
+ */
 function log( message ) {
   gruntRef.log.writeln( message );
 }
-
+/**
+ * Logs message to console using warn() from grunt.
+ * @param  {String} message Message to print with warn formatting.
+ */
 function warn( message ) {
   gruntRef.warn( message );
 }
-
+/**
+ * Logs message to console using log.error() and raises error from grunt.
+ * @param  {String} message Message to print in error formatting.
+ */
 function error( message ) {
   gruntRef.log.error( message ).error();
 }
-
+/**
+ * Pretty prints supplied object in JSON notation using grunt logging.
+ * @param  {String} id     String description of object
+ * @param  {Object} object Generic Object to be JSON-ified.
+ */
 function prettyPrint( id, object ) {
   log(id + ' : ' + JSON.stringify(object, null, 2));
 }
-
+/**
+ * Locates running process previously started by forever based on index file, and notifies callback. Will notify of undefined if not found, other wise the unformatted process object.
+ * @param  {String}   index    Index filename.
+ * @param  {Function} callback Delegate method to invoke with either the found process object or undefined if not found.
+ */
 function findProcessWithIndex( index, callback ) {
   var i, process;
   try {
@@ -44,12 +62,16 @@ function findProcessWithIndex( index, callback ) {
     callback.call(null, undefined);
   }
 }
-
+/**
+ * Attempts to start process using the index file.
+ * @param  {String} index Filename.
+ */
 function startForeverWithIndex( index ) {
   log( 'Attempting to start ' + index + ' as daemon.');
 
   done = this.async;
   findProcessWithIndex( index, function(process) {
+    // if found, be on our way without failing.
     if( typeof process !== 'undefined' ) {
       warn( index + ' is already running.');
       log( forever.format(true, [process]) );
@@ -65,7 +87,10 @@ function startForeverWithIndex( index ) {
     }
   });
 }
-
+/**
+ * Attempts to stop a process previously started associated with index.
+ * @param  {String} index Filename associated with previously started process.
+ */
 function stopOnProcess( index ) {
   log( 'Attempting to stop ' + index + '...' );
 
@@ -89,10 +114,14 @@ function stopOnProcess( index ) {
     }
   });
 }
-
+/**
+ * Attempts to stop and restart a process previously started associated with index. If no process found as previously started, just starts a new one.
+ * @param  {String} index Filename associated with previously started process.
+ */
 function restartOnProcess( index ) {
   log( 'Attempting to restart ' + index + '...' );
   
+  // generate delegate function to pass with proper contexts.
   var startRequest = (function(context, index) {
     return function() {
         startForeverWithIndex.call(context, index);
@@ -119,6 +148,10 @@ function restartOnProcess( index ) {
   });
 }
 
+/**
+ * grunt-future task
+ * @param  {Object} grunt Grunt
+ */
 module.exports = function( grunt ) {
 
   gruntRef = grunt;
@@ -126,7 +159,7 @@ module.exports = function( grunt ) {
 
       var index       = grunt.config('forever.main') || 'index.js',
           operation   = this.args[0];
-
+      
       try {
         if( commandMap.hasOwnProperty(operation) ) {
           commandMap[operation].call( this, index );
