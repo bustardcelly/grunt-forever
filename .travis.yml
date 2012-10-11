@@ -4,7 +4,3 @@ node_js:
 branches:
   only:
     - master
-notifications:
-  email:
-    - travis@nodejitsu.com
-  irc: "irc.freenode.org#nodejitsu"
