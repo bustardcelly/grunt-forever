@@ -1,4 +1,4 @@
-grunt-forever
+grunt-forever [![Build Status](https://travis-ci.org/bustardcelly/grunt-forever.png)](https://travis-ci.org/bustardcelly/grunt-forever)
 =============
 
 > forever task for grunt to start, stop and restart an application as a daemon.
