@@ -1,4 +1,4 @@
-var grunt = require('grunt'),
+var grunt   = require('grunt'),
     forever = require('forever');
 
 /*
@@ -23,13 +23,18 @@ var grunt = require('grunt'),
 
 exports['forever'] = {
   setUp: function(done) {
-    done();
+    grunt.task.directive('<forever:start>');
+    forever.list(false, function(context, list) {
+      done();
+    });
   },
   index: function(test) {
     test.expect(2);
-    test.equal(true, false, 'should default to index.js as the main file if not provided');
-    test.equal(true, false, 'should use the provided main file option if provided');
-    test.done();
+    forever.list(false, function(context, list) {
+      test.equal(true, false, 'should default to index.js as the main file if not provided');
+      test.equal(true, false, 'should use the provided main file option if provided');
+      test.done();
+    });
   },
   start: function(test) {
     test.expect(2);
@@ -50,6 +55,7 @@ exports['forever'] = {
     test.done();
   },
   tearDown: function(done) {
+    grunt.task.directive('<forever:stop>');
     done();
   }
-}
+};

@@ -6,7 +6,11 @@ module.exports = function(grunt) {
       files: ['test/*_test.js']
     },
     lint: {
-      all: ['grunt.js', 'tasks/*.js', 'test/spec/*.spec.js']
+      all: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
+    },
+    watch: {
+      files: '<config:lint.files>',
+      tasks: 'default'
     },
     jshint: {
       options: {
@@ -29,5 +33,10 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
   grunt.registerTask('default', 'lint test');
+
+  grunt.registerHelper('forever', function(operation) {
+    console.log( JSON.stringify(grunt.task, null, 2) );
+    grunt.task.run('forever:' + operation);
+  });
   
 };

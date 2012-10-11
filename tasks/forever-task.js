@@ -1,11 +1,11 @@
 var forever     = require('forever'),
-  logFile     = process.cwd() + '/forever.log',
-  commandMap  = {
-    start:      startForeverWithIndex,
-    stop:       stopOnProcess,
-    restart:    restartOnProcess
-  },
-  done, gruntRef;
+    logFile     = process.cwd() + '/forever.log',
+    commandMap  = {
+      start:      startForeverWithIndex,
+      stop:       stopOnProcess,
+      restart:    restartOnProcess
+    },
+    done, gruntRef;
 
 /**
  * Logs message to console using log.writeln() from grunt.
@@ -159,7 +159,7 @@ module.exports = function( grunt ) {
 
       var index       = grunt.config('forever.main') || 'index.js',
           operation   = this.args[0];
-      
+
       try {
         if( commandMap.hasOwnProperty(operation) ) {
           commandMap[operation].call( this, index );

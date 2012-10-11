@@ -24,8 +24,8 @@
   "engines": {
     "node": "*"
   },
-  "bin": {
-    "grunt-forever": "bin/grunt-forever"
+  "scripts": {
+    "test": "grunt test"
   },
   "dependencies": {
     "forever": ">=0.10.0"
@@ -40,6 +40,5 @@
     "gruntplugin",
     "plugins",
     "daemon"
-  ],
-  "readme": "# grunt-forever."
+  ]
 }
