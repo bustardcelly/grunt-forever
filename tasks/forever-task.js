@@ -71,7 +71,7 @@ function findProcessWithIndex( index, callback ) {
 function startForeverWithIndex( index ) {
   log( 'Attempting to start ' + index + ' as daemon.');
 
-  done = this.async;
+  done = this.async();
   findProcessWithIndex( index, function(process) {
     // if found, be on our way without failing.
     if( typeof process !== 'undefined' ) {
