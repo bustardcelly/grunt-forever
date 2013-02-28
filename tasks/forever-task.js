@@ -56,6 +56,7 @@ function findProcessWithIndex( index, callback ) {
         }
         process = undefined;
       }
+
       callback.call(null, process);
     });
   }
@@ -71,7 +72,7 @@ function findProcessWithIndex( index, callback ) {
 function startForeverWithIndex( index ) {
   log( 'Attempting to start ' + index + ' as daemon.');
 
-  done = this.async;
+  done = this.async();
   findProcessWithIndex( index, function(process) {
     // if found, be on our way without failing.
     if( typeof process !== 'undefined' ) {
@@ -97,7 +98,7 @@ function startForeverWithIndex( index ) {
  * Attempts to stop a process previously started associated with index.
  * @param  {String} index Filename associated with previously started process.
  */
-function stopOnProcess( index ) {
+function stopOnProcess(index) {
   log( 'Attempting to stop ' + index + '...' );
 
   done = this.async();
@@ -136,18 +137,18 @@ function restartOnProcess( index ) {
 
   done = this.async();
   findProcessWithIndex( index, function(process) {
-    if( typeof process !== 'undefined' ) {
-      log( forever.format(true,[process]) );
+    if(typeof process !== 'undefined') {
+      log(forever.format(true,[process]));
 
-      forever.restart( index )
+      forever.restart( index)
         .on('error', function(message) {
-          error( 'Error restarting ' + index + '. [REASON] :: ' + message );
+          error('Error restarting ' + index + '. [REASON] :: ' + message);
           done(false);
         });
       done();
     }
     else {
-      log( index + ' not found in list of processes in forever. Starting new instance...' );
+      log(index + ' not found in list of processes in forever. Starting new instance...');
       startRequest();
       done();
     }
@@ -158,24 +159,24 @@ function restartOnProcess( index ) {
  * grunt-future task
  * @param  {Object} grunt Grunt
  */
-module.exports = function( grunt ) {
+module.exports = function(grunt) {
 
   gruntRef = grunt;
-  grunt.registerTask( 'forever', 'Starts node app as a daemon.', function() {
+  grunt.registerTask( 'forever', 'Starts node app as a daemon.', function(target) {
 
-      var index       = grunt.config('forever.main') || 'index.js',
-          operation   = this.args[0];
+      var index = this.options().index || 'index.js',
+          operation = target;
 
       try {
-        if( commandMap.hasOwnProperty(operation) ) {
-          commandMap[operation].call( this, index );
+        if(commandMap.hasOwnProperty(operation)) {
+          commandMap[operation].call(this, index);
         }
         else {
-          warn( 'Operation ' + operation + ' is not supported currently. Only forever:start, forever:stop or forever:restart.' );
+          warn('Operation ' + operation + ' is not supported currently. Only forever:start, forever:stop or forever:restart.');
         }
       }
-      catch( e ) {
-          error( 'Exception thrown in attempt to ' + operation + ' on ' + index + ': ' + e );
+      catch(e) {
+          error('Exception thrown in attempt to ' + operation + ' on ' + index + ': ' + e);
       }
   });
 };
