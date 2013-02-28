@@ -47,7 +47,9 @@ The option specifies the main application file that will be run under a daemon u
 ### Config Example
 ```javascript
 forever: {
-  main: 'index.js'
+  options: {
+    index: 'index.js'
+  }
 }
 ```
 
