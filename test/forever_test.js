@@ -21,19 +21,10 @@ var grunt   = require('grunt'),
     test.ifError(value)
 */
 
-grunt.registerHelper('plugin', function() {
-  return 'plugin!!!';
-});
-
-exports['test'] = {
-  setUp: function(done) {
-    // setup here
-    done();
-  },
-  'helper': function(test) {
+exports.forever = {
+  document: function(test) {
     test.expect(1);
-    // tests here
-    test.equal(grunt.helper('plugin'), 'plugin!!!', 'should return the correct value.');
+    test.ok(true, 'Due to the asynchronous nature of the forever task, test setup is proving to be difficult. Need to find a way to pause setup and teardown until forever has started/stopped.');
     test.done();
   }
 };
@@ -42,7 +33,7 @@ exports['test'] = {
 /*
 exports['forever'] = {
   setUp: function(done) {
-    grunt.task.directive('<forever:start>');
+    grunt.task.run('forever:start');
     forever.list(false, function(context, list) {
       done();
     });
@@ -74,7 +65,7 @@ exports['forever'] = {
     test.done();
   },
   tearDown: function(done) {
-    grunt.task.directive('<forever:stop>');
+    grunt.task.run('forever:stop');
     done();
   }
 };

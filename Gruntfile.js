@@ -37,7 +37,9 @@ module.exports = function(grunt) {
       tests: ['test/*_test.js']
     },
     forever: {
-      main: './test/fixtures/index.js'
+      options: {
+        index: './test/fixtures/index.js'
+      }
     }
 
   });
@@ -52,10 +54,6 @@ module.exports = function(grunt) {
 
   // By default, lint and run all tests.
   grunt.registerTask('test', ['nodeunit']);
-  grunt.registerTask('default', ['jshint', 'test', 'build-contrib']);
+  grunt.registerTask('default', ['jshint', 'test']);
   
-  // grunt.registerHelper('forever', function(operation) {
-  //   grunt.task.run('forever:' + operation);
-  // });
-
 };

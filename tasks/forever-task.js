@@ -140,7 +140,7 @@ function restartOnProcess( index ) {
     if(typeof process !== 'undefined') {
       log(forever.format(true,[process]));
 
-      forever.restart( ndex)
+      forever.restart( index)
         .on('error', function(message) {
           error('Error restarting ' + index + '. [REASON] :: ' + message);
           done(false);
@@ -164,12 +164,12 @@ module.exports = function(grunt) {
   gruntRef = grunt;
   grunt.registerTask( 'forever', 'Starts node app as a daemon.', function(target) {
 
-      var index = grunt.config('forever.main') || 'index.js',
+      var index = this.options().index || 'index.js',
           operation = target;
 
       try {
         if(commandMap.hasOwnProperty(operation)) {
-          commandMap[operation].call( this, index );
+          commandMap[operation].call(this, index);
         }
         else {
           warn('Operation ' + operation + ' is not supported currently. Only forever:start, forever:stop or forever:restart.');

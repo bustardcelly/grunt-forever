@@ -3,6 +3,9 @@ grunt-forever [![Build Status](https://travis-ci.org/bustardcelly/grunt-forever.
 
 > forever task for grunt to start, stop and restart an application as a daemon.
 
+## Updated for Grunt 0.4.0
+This grunt task plugin has been updated to work with [Grunt 0.4.0](https://github.com/gruntjs/grunt/wiki/Getting-started) release. The working version for Grunt 0.3.x has been tagged [0.2.2](https://github.com/bustardcelly/grunt-forever/tree/0.2.2).
+
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile](https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md) with: `npm install grunt-forever`
 
