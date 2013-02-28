@@ -1,7 +1,7 @@
 {
   "name": "grunt-forever",
   "description": "Grunt task for starting and stopping an application as a daemon using forever",
-  "version": "0.2.1",
+  "version": "0.4.0",
   "homepage": "https://github.com/bustardcelly/grunt-forever",
   "author": {
     "name": "Todd Anderson",
@@ -31,7 +31,10 @@
     "forever": ">=0.10.0"
   },
   "devDependencies": {
-    "grunt": "~0.3.16"
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-internal": "~0.4.3"
   },
   "keywords": [
     "forever",
