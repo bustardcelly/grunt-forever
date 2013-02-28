@@ -17,7 +17,7 @@ grunt.loadNpmTasks('grunt-forever');
 Inside your `grunt.js` file add a section named `forever`. This section specifies the `forever` task and provides the main application filepath option that will be run. The main filepath defaults to `index.js` if not provided.
 
 #### Named Arguments
-grunt-forever uses colon-separated arguments for the `forever` task described in the [grunt API](https://github.com/gruntjs/grunt/blob/master/docs/api.md). Supported name arguments are:
+grunt-forever uses colon-separated arguments for the `forever` task described in the [grunt API](https://github.com/gruntjs/grunt/wiki/grunt.task#wiki-grunt-task-registerTask). Supported name arguments are:
 
 * forever:start
 * forever:stop
