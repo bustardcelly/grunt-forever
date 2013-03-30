@@ -1,7 +1,9 @@
 var forever     = require('forever'),
-    logDir      = process.cwd() + '/forever',
-    logFile     = logDir + '/out.log',
-    errFile     = logDir + '/err.log',
+    path        = require('path'),
+    logDir      = path.join(process.cwd(), '/forever'),
+    logFile     = path.join(logDir, '/out.log'),
+    errFile     = path.join(logDir, '/err.log'),
+    commandName = 'node',
     commandMap  = {
       start:      startForeverWithIndex,
       stop:       stopOnProcess,
@@ -82,10 +84,11 @@ function startForeverWithIndex( index ) {
     }
     else {
       gruntRef.file.mkdir(logDir);
-      // 'forever start -o out.log -e err.log -a -m 3 index.js';
+      // 'forever start -o out.log -e err.log -c node -a -m 3 index.js';
       forever.startDaemon( index, {
         errFile: errFile,
         outFile: logFile,
+        command: commandName,
         append: true,
         max: 3
       });
@@ -127,7 +130,7 @@ function stopOnProcess(index) {
  */
 function restartOnProcess( index ) {
   log( 'Attempting to restart ' + index + '...' );
-  
+
   // generate delegate function to pass with proper contexts.
   var startRequest = (function(context, index) {
     return function() {
@@ -166,6 +169,11 @@ module.exports = function(grunt) {
 
       var index = this.options().index || 'index.js',
           operation = target;
+
+      commandName = this.options().command;
+      logDir  = this.options().logDir && path.join(process.cwd(), this.options().logDir) || logDir;
+      logFile = this.options().logFile && path.join(logDir, this.options().logFile) || logFile;
+      errFile = this.options().errFile && path.join(logDir, this.options().errFile) || errFile;
 
       try {
         if(commandMap.hasOwnProperty(operation)) {

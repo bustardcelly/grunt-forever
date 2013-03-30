@@ -40,15 +40,33 @@ Attempts to restart the process previously started. If not currently running, st
 
 #### Options
 
-##### main ```string```
+##### index ```string```
 
 The option specifies the main application file that will be run under a daemon using `forever`.
+
+##### command ```string```
+
+The command to execute, defaults to 'node'. Set this to 'coffee' to run
+coffeescript applications.
+
+##### logDir ```string```
+
+The directory log files are saved, defaults to 'forever'.
+
+##### errFile ```string```
+
+File stderr is logged into, defaults to 'err.log'.
+
+##### logFile ```string```
+
+File stdout is logged into, defaults to 'out.log'.
 
 ### Config Example
 ```javascript
 forever: {
   options: {
-    index: 'index.js'
+    index: 'index.js',
+    logDir: 'logs'
   }
 }
 ```
