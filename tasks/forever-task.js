@@ -171,9 +171,11 @@ module.exports = function(grunt) {
           operation = target;
 
       commandName = this.options().command;
-      logDir  = this.options().logDir && path.join(process.cwd(), this.options().logDir) || logDir;
-      logFile = this.options().logFile && path.join(logDir, this.options().logFile) || logFile;
-      errFile = this.options().errFile && path.join(logDir, this.options().errFile) || errFile;
+      if (this.options().logDir) {
+        logDir  = path.join(process.cwd(), this.options().logDir) || logDir;
+        logFile = path.join(logDir, this.options().logFile || 'out.log');
+        errFile = path.join(logDir, this.options().errFile || 'err.log');
+      }
 
       try {
         if(commandMap.hasOwnProperty(operation)) {
