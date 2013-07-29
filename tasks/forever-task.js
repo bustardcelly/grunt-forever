@@ -3,6 +3,7 @@ var forever     = require('forever'),
     logDir      = path.join(process.cwd(), '/forever'),
     logFile     = path.join(logDir, '/out.log'),
     errFile     = path.join(logDir, '/err.log'),
+    killSignal  = 'SIGKILL'
     commandName = 'node',
     commandMap  = {
       start:      startForeverWithIndex,
