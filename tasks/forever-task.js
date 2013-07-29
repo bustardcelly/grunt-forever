@@ -90,7 +90,8 @@ function startForeverWithIndex( index ) {
         outFile: logFile,
         command: commandName,
         append: true,
-        max: 3
+        max: 3,
+        killSignal: killSignal
       });
       log( 'Logs can be found at ' + logDir + '.' );
       done();
@@ -174,6 +175,7 @@ module.exports = function(grunt) {
       logDir  = this.options().logDir && path.join(process.cwd(), this.options().logDir) || logDir;
       logFile = this.options().logFile && path.join(logDir, this.options().logFile) || logFile;
       errFile = this.options().errFile && path.join(logDir, this.options().errFile) || errFile;
+      killSignal = this.options().killSignal || 'SIGKILL'
 
       try {
         if(commandMap.hasOwnProperty(operation)) {
