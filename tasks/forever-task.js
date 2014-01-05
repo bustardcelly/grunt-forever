@@ -143,12 +143,11 @@ function restartOnProcess( index ) {
     if(typeof process !== 'undefined') {
       log(forever.format(true,[process]));
 
-      forever.restart( index)
-        .on('error', function(message) {
-          error('Error restarting ' + index + '. [REASON] :: ' + message);
-          done(false);
-        });
-      done();
+      forever.stop(index).on('stop', function(){
+          startRequest();
+          done()
+      })
+
     }
     else {
       log(index + ' not found in list of processes in forever. Starting new instance...');
