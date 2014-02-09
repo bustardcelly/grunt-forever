@@ -1,4 +1,4 @@
-grunt-forever [![Build Status](https://travis-ci.org/bustardcelly/grunt-forever.png)](https://travis-ci.org/bustardcelly/grunt-forever)
+grunt-forever
 =============
 
 > forever task for grunt to start, stop and restart an application as a daemon.
@@ -22,11 +22,11 @@ Inside your `grunt.js` file add a section named `forever`. This section specifie
 #### Named Arguments
 grunt-forever uses colon-separated arguments for the `forever` task described in the [grunt API](https://github.com/gruntjs/grunt/wiki/grunt.task#wiki-grunt-task-registerTask). Supported name arguments are:
 
-* forever:start
-* forever:stop
-* forever:restart
+* forever:server:start
+* forever:server:stop
+* forever:server:restart
 
-##### start 
+##### start
 
 Attempts to start the main application file as a daemon if not currently running.
 
@@ -64,22 +64,31 @@ File stdout is logged into, defaults to 'out.log'.
 ### Config Example
 ```javascript
 forever: {
-  options: {
-    index: 'index.js',
-    logDir: 'logs'
+  server1: {
+    options: {
+      index: 'index.js',
+      logDir: 'logs'
+    }
+  },
+
+  server2: {
+    options: {
+      index: 'otherindex.js',
+      logDir: 'logs'
+    }
   }
 }
 ```
 
 ### Command example
 ```bash
-grunt forever:start
+grunt forever:server1:start
 ```
 
 ```bash
-grunt forever:stop
+grunt forever:server2:stop
 ```
 
 ```bash
-grunt forever:restart
+grunt forever:server1:restart
 ```
