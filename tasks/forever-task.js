@@ -147,8 +147,8 @@ function restartOnProcess( index ) {
     else {
       log(index + ' not found in list of processes in forever. Starting new instance...');
       startRequest();
-      done();
     }
+    done();
   });
 }
 
