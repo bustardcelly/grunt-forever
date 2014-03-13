@@ -22,8 +22,7 @@ module.exports = function(grunt) {
         sub: true,
         boss: true,
         eqnull: true,
-        node: true,
-        es5: true
+        node: true
       }
     },
     watch: {
@@ -57,7 +56,6 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
-  grunt.loadNpmTasks('grunt-contrib-internal');
 
   // By default, lint and run all tests.
   grunt.registerTask('test', ['nodeunit']);

@@ -145,7 +145,7 @@ function restartOnProcess( index ) {
 
       forever.stop(index).on('stop', function(){
           startRequest();
-      })
+      });
 
     }
     else {
