@@ -142,10 +142,7 @@ function restartOnProcess( index ) {
   findProcessWithIndex( index, function(process) {
     if(typeof process !== 'undefined') {
       log(forever.format(true,[process]));
-
-      forever.stop(index).on('stop', function(){
-          startRequest();
-      })
+      forever.restart(index, false);
 
     }
     else {
