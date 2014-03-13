@@ -7,12 +7,23 @@ grunt-forever
 This grunt task plugin has been updated to work with [Grunt 0.4.0](https://github.com/gruntjs/grunt/wiki/Getting-started) release. The working version for Grunt 0.3.x has been tagged [0.2.2](https://github.com/bustardcelly/grunt-forever/tree/0.2.2).
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile](https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md) with: `npm install grunt-forever`
+Install this grunt plugin next to your project's [grunt.js gruntfile](https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md) with: 
+
+```
+$ npm install grunt-forever
+```
 
 Then add this line to your project's `grunt.js` gruntfile:
 
 ```javascript
 grunt.loadNpmTasks('grunt-forever');
+```
+
+## Tests
+There are several specs verifying the `start`, `stop` and `restart` commands for the task. To run the feature specs:
+
+```
+$ npm run test
 ```
 
 ### Overview
@@ -22,9 +33,9 @@ Inside your `grunt.js` file add a section named `forever`. This section specifie
 #### Named Arguments
 grunt-forever uses colon-separated arguments for the `forever` task described in the [grunt API](https://github.com/gruntjs/grunt/wiki/grunt.task#wiki-grunt-task-registerTask). Supported name arguments are:
 
-* forever:server:start
-* forever:server:stop
-* forever:server:restart
+* forever:<target>:start
+* forever:<target>:stop
+* forever:<target>:restart
 
 ##### start
 
