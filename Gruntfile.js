@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   'use strict';
   grunt.initConfig({
     jshint: {
-      all: ['Gruntfile.js', 'tasks/**/*.js', 'test/**/*.js'],
+      all: ['Gruntfile.js', 'tasks/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -28,37 +28,31 @@ module.exports = function(grunt) {
     watch: {
       all: {
         files: ['<%= jshint.all %>'],
-        tasks: ['jshint', 'nodeunit'],
-        options: {interrupt: true}
+        tasks: ['jshint'],
+        options: {
+          interrupt: true
+        }
       }
-    },
-    nodeunit: {
-      tests: ['test/*_test.js']
     },
     forever: {
       test: {
         options: {
-          index: './test/fixtures/index.js'
+          index: __dirname + '/test/fixtures/index.js'
         }
       },
       test2: {
         options: {
-          index: './test/fixtures/index2.js'
+          index: __dirname + '/test/fixtures/index2.js'
         }
       }
     }
-
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
-
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-
   // By default, lint and run all tests.
-  grunt.registerTask('test', ['nodeunit']);
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint']);
 
 };
