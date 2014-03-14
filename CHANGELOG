@@ -1,4 +1,8 @@
-0.4.0:
-  date: 2013-02-28
-  changes:
-    - Grunt 0.4.0 compliant.
+### 0.4.3 / 2014-03-13
+  * introduction of proper testing of plugin under cucumber.
+  * merge of conflicts to use forever.restart() over async restart on stop().
+  * pulling in updated dependencies. some cleanup.
+  * Fixed forever:server:restart task.
+
+### 0.4.0 / 2013-02-28
+  * Grunt 0.4.0 compliant.

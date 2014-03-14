@@ -105,11 +105,3 @@ grunt forever:server2:stop
 ```bash
 grunt forever:server1:restart
 ```
-
-## Changelog
-0.4.3 / 2014-03-13
-==========
-  * introduction of proper testing of plugin under cucumber.
-  * merge of conflicts to use forever.restart() over async restart on stop().
-  * pulling in updated dependencies. some cleanup.
-  * Fixed forever:server:restart task.
