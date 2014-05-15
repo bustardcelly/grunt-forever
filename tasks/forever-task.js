@@ -162,7 +162,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask( 'forever', 'Starts node app as a daemon.', function(target) {
 
       var index = this.options().index || 'index.js',
-          operation = target || 'start';
+          operation = target || this.options().operation || 'start';
 
       commandName = this.options().command;
       if (this.options().logDir) {
