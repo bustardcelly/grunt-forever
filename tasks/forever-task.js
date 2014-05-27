@@ -1,8 +1,9 @@
 var forever     = require('forever'),
     path        = require('path'),
     logDir      = path.join(process.cwd(), '/forever'),
-    logFile     = path.join(logDir, '/out.log'),
+    outFile     = path.join(logDir, '/out.log'),
     errFile     = path.join(logDir, '/err.log'),
+    logFile     = path.join(logDir, '/log.log'),
     commandName = 'node',
     commandMap  = {
       start:      startForeverWithIndex,
@@ -87,7 +88,8 @@ function startForeverWithIndex( index ) {
       // 'forever start -o out.log -e err.log -c node -a -m 3 index.js';
       forever.startDaemon( index, {
         errFile: errFile,
-        outFile: logFile,
+        outFile: outFile,
+        logFile: logFile,
         command: commandName,
         append: true,
         max: 3
@@ -167,8 +169,9 @@ module.exports = function(grunt) {
       commandName = this.options().command;
       if (this.options().logDir) {
         logDir  = path.join(process.cwd(), this.options().logDir) || logDir;
-        logFile = path.join(logDir, this.options().logFile || 'out.log');
+        outFile = path.join(logDir, this.options().outFile || 'out.log');
         errFile = path.join(logDir, this.options().errFile || 'err.log');
+        logFile = path.join(logDir, this.options().logFile || 'log.log');
       }
 
       try {
