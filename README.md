@@ -74,6 +74,11 @@ File stderr is logged into, defaults to 'err.log'.
 
 File stdout is logged into, defaults to 'out.log'.
 
+##### operation ```string```
+
+Allows assigning a task to a certain operation (start/ stop/ restart).
+If a named argument is provided, it will overwrite the operation variable
+
 ### Config Example
 ```javascript
 forever: {
@@ -90,6 +95,14 @@ forever: {
       logDir: 'logs'
     }
   }
+  
+  restartServer1: {
+      options: {
+        operation: "restart",
+        index: 'index.js',
+        logDir: 'logs'
+      }
+    }
 }
 ```
 
@@ -105,3 +118,12 @@ grunt forever:server2:stop
 ```bash
 grunt forever:server1:restart
 ```
+
+```bash
+grunt forever:restartServer1
+```
+
+```bash
+grunt forever:restartServer1:stop
+```
+will stop server1
