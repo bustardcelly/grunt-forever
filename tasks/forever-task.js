@@ -91,8 +91,7 @@ function startForeverWithIndex( index ) {
         outFile: outFile,
         logFile: logFile,
         command: commandName,
-        append: true,
-        max: 3
+        append: true
       });
       log( 'Logs can be found at ' + logDir + '.' );
       done();
