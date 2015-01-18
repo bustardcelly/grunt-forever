@@ -10,6 +10,8 @@ var forever     = require('forever'),
       stop:       stopOnProcess,
       restart:    restartOnProcess
     },
+    watch = true,
+    watchDirectory = 'server',
     done, gruntRef;
 
 /**
@@ -92,7 +94,9 @@ function startForeverWithIndex( index ) {
         logFile: logFile,
         command: commandName,
         append: true,
-        max: 3
+        max: 3,
+        watch: true,
+        watchDirectory: 'server'
       });
       log( 'Logs can be found at ' + logDir + '.' );
       done();
@@ -173,6 +177,9 @@ module.exports = function(grunt) {
         errFile = path.join(logDir, this.options().errFile || 'err.log');
         logFile = path.join(logDir, this.options().logFile || 'log.log');
       }
+      
+      watch = this.options.watch || true;
+      watchDirectory  = this.options.watchDirectory || 'server';
 
       try {
         if(commandMap.hasOwnProperty(operation)) {
