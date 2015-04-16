@@ -19,7 +19,7 @@ module.exports = function() {
       .expect(200)
       .end(function(error, res) {
         if(error) {
-          expect(true, error).to.equal(true);
+          expect(false, error).to.equal(true);
         }
         response = res;
         callback();

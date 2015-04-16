@@ -28,7 +28,7 @@
     "test": "node node_modules/.bin/cucumber-js"
   },
   "dependencies": {
-    "forever": ">=0.13.0"
+    "forever": "^0.14.1"
   },
   "devDependencies": {
     "grunt": "^0.4.4",

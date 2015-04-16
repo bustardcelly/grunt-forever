@@ -4,7 +4,7 @@ var forever     = require('forever'),
     outFile     = path.join(logDir, '/out.log'),
     errFile     = path.join(logDir, '/err.log'),
     logFile     = path.join(logDir, '/log.log'),
-    killSignal  = 'SIGKILL'
+    killSignal  = 'SIGKILL',
     commandName = 'node',
     commandMap  = {
       start:      startForeverWithIndex,
