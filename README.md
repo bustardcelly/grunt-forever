@@ -68,11 +68,19 @@ The directory log files are saved, defaults to 'forever'.
 
 ##### errFile ```string```
 
-File stderr is logged into, defaults to 'err.log'.
+File stderr is logged into. If omitted, not generated.
+
+##### outFile ```string```
+
+File stdout is logged into. If omitted, not generated.
 
 ##### logFile ```string```
 
-File stdout is logged into, defaults to 'out.log'.
+Logs the forever outiput to file. If omitted, not generated.
+
+##### killSignal ```string```
+
+Exit signal specification. Defaults to `SIGKILL`.
 
 ### Config Example
 ```javascript
