@@ -4,6 +4,7 @@ var forever     = require('forever'),
     outFile     = path.join(logDir, '/out.log'),
     errFile     = path.join(logDir, '/err.log'),
     logFile     = path.join(logDir, '/log.log'),
+    killSignal  = 'SIGKILL'
     commandName = 'node',
     commandMap  = {
       start:      startForeverWithIndex,
@@ -92,7 +93,8 @@ function startForeverWithIndex( index ) {
         logFile: logFile,
         command: commandName,
         append: true,
-        max: 3
+        max: 3,
+        killSignal: killSignal
       });
       log( 'Logs can be found at ' + logDir + '.' );
       done();
@@ -173,6 +175,7 @@ module.exports = function(grunt) {
         errFile = path.join(logDir, this.options().errFile || 'err.log');
         logFile = path.join(logDir, this.options().logFile || 'log.log');
       }
+      killSignal = this.options().killSignal || 'SIGKILL'
 
       try {
         if(commandMap.hasOwnProperty(operation)) {
