@@ -6,11 +6,13 @@ Feature: Developer can start daemon with grunt task
   Background:
     Given I have the grunt-task plugin installed
 
+  @start
   Scenario: Daemon started
     Given I invoke "start" on target:"test" through grunt task
     When I visit "http://localhost:1337"
     Then I should see the body text: "Hello World"
 
+  @start
   Scenario: Subsequent :start invocation does not stop service
     Given I invoke "start" on target:"test" through grunt task
     And I invoke "start" on target:"test" through grunt task

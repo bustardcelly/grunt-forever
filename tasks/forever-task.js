@@ -60,7 +60,6 @@ function findProcessWithIndex( index, callback ) {
         }
         process = undefined;
       }
-
       callback.call(null, process);
     });
   }
@@ -73,10 +72,10 @@ function findProcessWithIndex( index, callback ) {
  * Attempts to start process using the index file.
  * @param  {String} index Filename.
  */
-function startForeverWithIndex( index ) {
+function startForeverWithIndex( index, doneCB ) {
   log( 'Attempting to start ' + index + ' as daemon.');
 
-  done = this.async();
+  done = doneCB || this.async();
   findProcessWithIndex( index, function(process) {
     // if found, be on our way without failing.
     if( typeof process !== 'undefined' ) {
@@ -137,8 +136,8 @@ function restartOnProcess( index ) {
 
   // generate delegate function to pass with proper contexts.
   var startRequest = (function(context, index) {
-    return function() {
-        startForeverWithIndex.call(context, index);
+    return function(cb) {
+        startForeverWithIndex.call(context, index, cb);
     };
   }(this, index));
 
@@ -147,12 +146,12 @@ function restartOnProcess( index ) {
     if(typeof process !== 'undefined') {
       log(forever.format(true,[process]));
       forever.restart(index, false);
+      done();
     }
     else {
       log(index + ' not found in list of processes in forever. Starting new instance...');
-      startRequest();
+      startRequest(done);
     }
-    done();
   });
 }
 

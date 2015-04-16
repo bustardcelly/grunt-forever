@@ -6,6 +6,7 @@ Feature: Developer can stop previously started daemon with grunt task
   Background:
     Given I have the grunt-task plugin installed
 
+  @stop
   Scenario: Daemon stopped
     Given I invoke "start" on target:"test" through grunt task
     When I invoke "stop" on target:"test" through grunt task
