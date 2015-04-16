@@ -1,9 +1,9 @@
 var forever     = require('forever'),
     path        = require('path'),
-    logDir      = path.join(process.cwd(), '/forever'),
-    outFile     = path.join(logDir, '/out.log'),
-    errFile     = path.join(logDir, '/err.log'),
-    logFile     = path.join(logDir, '/log.log'),
+    logDir      = path.join(process.cwd(), 'forever'),
+    outFile     = undefined,
+    errFile     = undefined,
+    logFile     = undefined,
     killSignal  = 'SIGKILL',
     commandName = 'node',
     commandMap  = {
@@ -75,6 +75,13 @@ function findProcessWithIndex( index, callback ) {
 function startForeverWithIndex( index, doneCB ) {
   log( 'Attempting to start ' + index + ' as daemon.');
 
+  var config;
+  var appendConfig = function(prop, value) {
+    log('Adding to config: ' + prop + ', ' + value);
+    if(value !== undefined) {
+      config[prop] = value;
+    }
+  };
   done = doneCB || this.async();
   findProcessWithIndex( index, function(process) {
     // if found, be on our way without failing.
@@ -86,15 +93,16 @@ function startForeverWithIndex( index, doneCB ) {
     else {
       gruntRef.file.mkdir(logDir);
       // 'forever start -o out.log -e err.log -c node -a -m 3 index.js';
-      forever.startDaemon( index, {
-        errFile: errFile,
-        outFile: outFile,
-        logFile: logFile,
+      config = {
         command: commandName,
         append: true,
         max: 3,
         killSignal: killSignal
-      });
+      };
+      appendConfig('errFile', errFile);
+      appendConfig('outFile', outFile);
+      appendConfig('logFile', logFile);
+      forever.startDaemon( index, config );
       log( 'Logs can be found at ' + logDir + '.' );
       done();
     }
@@ -168,13 +176,11 @@ module.exports = function(grunt) {
           operation = target || 'start';
 
       commandName = this.options().command;
-      if (this.options().logDir) {
-        logDir  = path.join(process.cwd(), this.options().logDir) || logDir;
-        outFile = path.join(logDir, this.options().outFile || 'out.log');
-        errFile = path.join(logDir, this.options().errFile || 'err.log');
-        logFile = path.join(logDir, this.options().logFile || 'log.log');
-      }
-      killSignal = this.options().killSignal || 'SIGKILL'
+      logDir = undefined !== this.options().logDir ? path.join(process.cwd(), this.options().logDir) : logDir;
+      outFile = undefined !== this.options().outFile ? path.join(logDir, this.options().outFile) : outFile;
+      errFile = undefined !== this.options().errFile ? path.join(logDir, this.options().errFile) : errFile;
+      logFile = undefined !== this.options().logFile ? path.join(logDir, this.options().logFile) : logFile;
+      killSignal = this.options().killSignal || killSignal;
 
       try {
         if(commandMap.hasOwnProperty(operation)) {

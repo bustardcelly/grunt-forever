@@ -44,6 +44,13 @@ module.exports = function(grunt) {
         options: {
           index: __dirname + '/test/fixtures/index2.js'
         }
+      },
+      testLog: {
+        options: {
+          index: __dirname + '/test/fixtures/index.js',
+          logDir: 'forever',
+          logFile: 'loggy.txt'
+        }
       }
     }
   });
