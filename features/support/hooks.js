@@ -5,7 +5,7 @@ var chai = require('chai'),
     spawn = require('child_process').spawn;
 
 module.exports = function() {
-  
+
   this.World = require('./world').World;
 
   this.Before(function(callback) {
@@ -15,8 +15,10 @@ module.exports = function() {
 
   this.After(function(callback) {
     // ensure we kill daemon
-    spawn('grunt', [this.createTaskCommand(this.target, 'stop')])
-      .on('close', callback);
+		spawn('grunt', [this.createTaskCommand(this.target, 'stop')])
+		.on('close', function() {
+			callback();
+		});
   });
 
   // Common hooks.
