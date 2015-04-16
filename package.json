@@ -1,7 +1,7 @@
 {
   "name": "grunt-forever",
   "description": "Grunt task for starting and stopping an application as a daemon using forever",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "homepage": "https://github.com/bustardcelly/grunt-forever",
   "author": {
     "name": "Todd Anderson",
