@@ -11,8 +11,8 @@ module.exports = function() {
     request(url)
       .get('/')
       .end(function(error, response) {
-        expect(error).to.not.equal(undefined);
-        expect(error.code).to.equal('ECONNREFUSED');
+        expect(error, 'Error should be provided from access on stopped process.').to.not.equal(undefined);
+        expect(error.code, 'Error code should be provided as \'EXONNREFUSED\' on access of stopped process.').to.equal('ECONNREFUSED');
         callback();
       });
   });
