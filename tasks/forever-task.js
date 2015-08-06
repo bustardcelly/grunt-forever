@@ -176,7 +176,11 @@ module.exports = function(grunt) {
           operation = target || 'start';
 
       commandName = this.options().command;
-      logDir = undefined !== this.options().logDir ? path.join(process.cwd(), this.options().logDir) : logDir;
+
+      if (this.options().logDir) {
+        logDir = this.options().logDir.indexOf('/') === 0 ? this.options().logDir : path.join(process.cwd(), this.options().logDir);
+      }
+
       outFile = undefined !== this.options().outFile ? path.join(logDir, this.options().outFile) : outFile;
       errFile = undefined !== this.options().errFile ? path.join(logDir, this.options().errFile) : errFile;
       logFile = undefined !== this.options().logFile ? path.join(logDir, this.options().logFile) : logFile;
