@@ -82,6 +82,10 @@ Logs the forever outiput to file. If omitted, not generated.
 
 Exit signal specification. Defaults to `SIGKILL`.
 
+##### args ```string```
+
+An array of `arguments` to pass to application at launch.
+
 ### Config Example
 ```javascript
 forever: {
